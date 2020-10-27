@@ -176,32 +176,33 @@ void Bolso::eliminarBolso(string claveBolso) {
                 break;
             }
 
-            archivo.read(tempLen2, sizeof(int));
-            tam2 = atoi(tempLen2);
-            char tempNombre[tam2];
-            archivo.read(tempNombre, tam2);
-            tempNombre[tam2] = '\0';
-            nombre = tempNombre;
+            archivo.read(tempLen2, sizeof(int));// SE LEE LA LONGITUDO DEL CAMPO NOMBRE
+            tam2 = atoi(tempLen2);// SE CONVIERTE EL ARREGLO TEMPORAL A ENTERO
+            char tempNombre[tam2];// SE CREA EL ARREGLO DE CARACTERES PARA LA LECTURA DEL CAMPO
+            archivo.read(tempNombre, tam2);// SE LEE EL CAMPO NOMBRE
+            tempNombre[tam2] = '\0';// ASIGNAMOS EL CARACTER NULO MANUALMENTE
+            nombre = tempNombre;// LO PASAMOS AL ATRIBUTO DE LA CLASE
 
 
-            archivo.read(tempLen3, sizeof(int));
-            tam3 = atoi(tempLen3);
-            char tempDescripcion[tam3];
-            archivo.read(tempDescripcion, tam3);
-            tempDescripcion[tam3] = '\0';
-            descripcion = tempDescripcion;
+            archivo.read(tempLen3, sizeof(int));// SE LEE LA LONGITUDO DEL CAMPO DESCRIPCION
+            tam3 = atoi(tempLen3);// SE CONVIERTE EL ARREGLO TEMPORAL A ENTERO
+            char tempDescripcion[tam3];// SE CREA EL ARREGLO DE CARACTERES PARA LA LECTURA DEL CAMPO
+            archivo.read(tempDescripcion, tam3);// SE LEE EL CAMPO DESCRIPCION
+            tempDescripcion[tam3] = '\0';// ASIGNAMOS EL CARACTER NULO MANUALMENTE
+            descripcion = tempDescripcion;// LO PASAMOS AL ATRIBUTO DE LA CLASE
 
 
             // SI LA CLAVE QUE BUSCA ES IGUAL A LA CLAVE LEIDA EN EL REGISTRO ENTONCES SE AGREGA EL ASTERISCO AL INICIO DE LA CLAVE
 			//SE ACTIVA LA BANDERA DE BUSQUEDA
-            if(claveBolso == clave) {
+            if(claveBolso == clave) 
+            {
             	//AMPLIAMOS LA LONGITUD DE LA CLAVE PARA AGREGAR EL *
             	string tempString;
             	int LongD=tam1+1;
             	tempString = to_string(LongD);
         		strcpy(tempLen1, tempString.c_str());
+                
         		//AGREGAMOS EL ASTERISCO AL INICIO DE LA CADENA DE LA CLAVE Y LA REGRESAMOS A CHAR PAR APODER ALMACENARLA
-        		
             	tempString = "*"+claveBolso;
             	char auxClave[LongD];
         		strcpy(auxClave, tempString.c_str());
@@ -211,11 +212,14 @@ void Bolso::eliminarBolso(string claveBolso) {
             	archivot.write(tempLen1, sizeof(int));
 		        archivot.write(auxClave, LongD);
 		
+                // ESCRIBIMOS EN EL ARCHIVO CON LA NUEVA MODIFICACION 
 		        archivot.write(tempLen2, sizeof(int));
 		        archivot.write(tempNombre, tam2);
 		
+                // ESCRIBIMOS EN EL ARCHIVO CON LA NUEVA MODIFICACION 
 		        archivot.write(tempLen3, sizeof(int));
 		        archivot.write(tempDescripcion, tam3);
+
 		        //MOSTRAMOS EN PANTALLA EL REGISTRO ELIMINADO
                 cout << endl << "Registro eliminado:" << endl
                      << "Clave: " << tempString << endl
@@ -225,7 +229,8 @@ void Bolso::eliminarBolso(string claveBolso) {
                 encontrado = true;
             }
             //PASAMOS EL REGISTRO IGUAL A COMO SE ENCUENTRA
-            else {
+            else 
+            {
             	archivot.write(tempLen1, sizeof(int));
 		        archivot.write(tempClave, tam1);
 		
@@ -237,7 +242,8 @@ void Bolso::eliminarBolso(string claveBolso) {
 			}
         }
         // SI NO SE ACTIVO LA BANDERA, NO SE ENCONTRO
-        if(!encontrado) {
+        if(!encontrado) 
+        {
             cout << endl << "No se encontro" << endl;
         }
     }
@@ -245,12 +251,11 @@ void Bolso::eliminarBolso(string claveBolso) {
     // SE CIERRA EL ARCHIVO
     archivo.close();
     archivot.close();
+
     //ELIMINAMOS EL ORIGINAL Y SOBREESCRIBIMOS EL NOMBRE DEL TEMPORAL POR EL DE EL ORIGINAL
     remove("archivo.txt");
     rename("archivot.txt", "archivo.txt");
 }
-
-
 
 
 // GENERA UNA CLAVE PARA EL BOLSO

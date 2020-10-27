@@ -12,19 +12,16 @@ Profesor: Graciela Lara Lopez
 
 #include "bolso.h"
 #include <iostream>
-// #include <cwchar>
-// #include <clocale>
 #include<stdlib.h>
 
 using namespace std;
 
-//Funcion que despliega el menú de opciones y retorna
-//en entero la opcion del usuario
+//Función que despliega el menú de opciones y retorna
+//en entero la opción del usuario
 int opcMenu();
 
-//funcion para confirmar opcion elegida
+//función para confirmar opción elegida
 bool confirmacion(int);
-
 
 //Funciones para validar entrada de datos
 int tomarInt();
@@ -32,57 +29,73 @@ bool tipoIntValido(string numero);
 
 int main() {
 
-    //Cambiando color de consola
-    system("color F1");
+    system("color F1");//Cambiando color de consola
 
+    //Creamos objeto bolso
     Bolso bolso;
-
-    //setlocale(LC_ALL,"");
 
     int opc;
 
     do {
-        opc = opcMenu();
+        opc = opcMenu();// DESPLIEGA EL MENÚ DE OPCIONES Y RETORNA
+                        // UN INT CON LA OPCIÓN DEL USUARIO
 
         switch(opc) {
-        case 1: {
-            bolso.insertarBolso();
+        case 1: 
+        {
+            bolso.insertarBolso();//Inserta un nuevo bolso al archivo
         }
         break;
-        case 2: {
+
+        case 2: 
+        {
             string claveBolso;
 
-            do {
+            do 
+            {
                 cout << "Ingrese la clave a consultar: ";
                 getline(cin, claveBolso);
-                break;
-                if(claveBolso.size() != 6) {
+                //break;
+                if(claveBolso.size() != 6) //CONFIRMAMOS QUE LOS DATOS CUMPLAN CON LA FORMA DE CAMPO CLAVE
+                {
                     cout << "Error, la clave son solo 6 caracteres de la forma: (AAA-00)" << endl;
-                } else {
+                } 
+                else 
+                {
                     break;
                 }
             } while(true);
 
+            //MANDA LA CLAVE DEL BOLSO COMO PARAMETRO PARA REALIZAR LA BUSQUEDA Y DESPLEGAR INFORMACIÓN
             bolso.consultaBolso(claveBolso);
         }
         break;
-        case 3: {
+
+        case 3: 
+        {
             string claveBolso;
 
-            do {
+            do 
+            {
                 cout << "Ingrese la clave del producto a eliminar: ";
                 getline(cin, claveBolso);
-                if(claveBolso.size() != 6) {
+                if(claveBolso.size() != 6) //CONFIRMAMOS QUE LOS DATOS CUMPLAN CON LA FORMA DE CAMPO CLAVE
+                {
                     cout << "Error, la clave son solo 6 caracteres de la forma (AAA-00)" << endl;
-                } else {
+                } 
+                else 
+                {
                     break;
                 }
             } while(true);
 
+            //MANDA LA CLAVE DEL BOLSO COMO PARAMETRO PARA REALIZAR LA BUSQUEDA, ELIMINAR Y DESPLEGAR INFORMACIÓN
             bolso.eliminarBolso(claveBolso);
         }
         break;
-        case 4: {
+
+        case 4: 
+        {
             cout<<"Fin del programa"<<endl<<endl;
         }
         break;
@@ -114,34 +127,48 @@ int opcMenu() {
         opcion = tomarInt();
 
         switch(opcion) {
-        case 1: {
-            if(confirmacion(opcion) == true) {
+        case 1: 
+        {
+            if(confirmacion(opcion) == true) 
+            {
                 return opcion;
             }
         }
         break;
-        case 2: {
-            if(confirmacion(opcion) == true) {
+
+        case 2: 
+        {
+            if(confirmacion(opcion) == true) 
+            {
                 return opcion;
             }
         }
         break;
-        case 3: {
-            if(confirmacion(opcion) == true) {
+
+        case 3: 
+        {
+            if(confirmacion(opcion) == true) 
+            {
                 return opcion;
             }
         }
         break;
-        case 4: {
-            if(confirmacion(opcion) == true) {
+
+        case 4: 
+        {
+            if(confirmacion(opcion) == true) 
+            {
                 return opcion;
             }
         }
         break;
-        default: {
+
+        default: 
+        {
             cout<<"Opcion invalida, intenta de nuevo con un entero entre 1 y 4."<<endl;
         }
         break;
+
         }
         system("pause");
 
@@ -160,7 +187,7 @@ bool confirmacion(int opcion) {
         nombreDeOpcion = "Mostrar registro por su codigo";
         break;
     case 3:
-        nombreDeOpcion = "Eliminar registro de manera LoGICA";
+        nombreDeOpcion = "Eliminar registro de manera LOGICA";
         break;
     case 4:
         nombreDeOpcion = "SALIR";
@@ -169,18 +196,18 @@ bool confirmacion(int opcion) {
         break;
     }
 
-    cout<<"Elegiste la opcion "<<opcion<<".-"<<nombreDeOpcion<<" "<<endl;
+    cout<<"\nElegiste la opcion "<<opcion<<".-"<<nombreDeOpcion<<" "<<endl;
     cout<<"Presiona 1 para confirmar o 0 para regresar el menu de opciones."<<endl<<endl;
 
     int opc1 = tomarInt();
-    cout<<endl<<endl;
+    cout<<endl;
 
     if(opc1 == 1) {
         return true;
     } else if(opc1 == 0) {
         return false;
     } else {
-        cout<<"Opcion invalida, volveras al mena inicial"<<endl;
+        cout<<"Opcion invalida, volveras al menu inicial"<<endl;
         return false;
     }
 }

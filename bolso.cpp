@@ -14,16 +14,16 @@ void Bolso::insertarBolso() {
     // SINO CONTINUA
     else {
 
-        string tempString;
-        int tam1, tam2, tam3;
+        string tempString;// VARIABLE PARA ALMACENAR EL TAMAÑO DE LOS CAMPOS EN STRING
+        int tam1, tam2, tam3;// VARIABLE PARA ALMACENAR EL TAMAÑO DE LOS CAMPOS EN STRING
 
-        cout << "Ingrese el nombre: ";
+        cout << "Ingrese el nombre: ";//CAPTURAS DE NOMBRE
         getline(cin, nombre);
 
-        cout << "Ingrese la descripcion: ";
+        cout << "Ingrese la descripcion: ";//CAPTURAS DE DESCRIPCION
         getline(cin, descripcion);
 
-        clave = generarClave(nombre);
+        clave = generarClave(nombre);//SE MANDA LLAMAR LA FUNCION GENERAR CLAVE QUE DEVUELVE UNA CLAVE PARA LA CLAVE, RECIBE EL NOMBRE PARA FORMARLA
 
         // SE OBTIENE LA LONGITUD DE LOS CAMPOS
         tam1 = clave.size();
@@ -31,22 +31,23 @@ void Bolso::insertarBolso() {
         tam3 = descripcion.size();
 
         // SE CONVIERTE LA LONGITUD DE CLAVE A CHAR[]
-        tempString = to_string(tam1);
-        char tempLenClave[sizeof(int)];
-        strcpy(tempLenClave, tempString.c_str());
+        tempString = to_string(tam1); //CONVERTIMOS EL TAMA�O 1 A STRING
+        char tempLenClave[sizeof(int)];//CREAMOS LA VARIABLE DE CADENA DE CARACTERES, DE ACUERDO AL TAMA�O
+        strcpy(tempLenClave, tempString.c_str());//COPIAMOS EL STRING A LA CADENA DE CARACTERES
 
         // SE CONVIERTE LA CLAVE A CHAR[]
-        char tempClave[tam1];
-        strcpy(tempClave, clave.c_str());
+        char tempClave[tam1];//SE CREA LA VARIABLE CHAR
+        strcpy(tempClave, clave.c_str());//LE PASAS A TEMCLAVE LO QUE TENGA LA CLAVE
+
 
         // SE CONVIERTE LA LONGITUD DE NOMBRE A CHAR[]
-        tempString = to_string(tam2);
-        char tempLenNombre[sizeof(int)];
-        strcpy(tempLenNombre, tempString.c_str());
+        tempString = to_string(tam2);//CONVERTIMOS EL TAMA�O 2 A STRING
+        char tempLenNombre[sizeof(int)];//CREAMOS LA VARIABLE DE CADENA DE CARACTERES, DE ACUERDO AL TAMA�O
+        strcpy(tempLenNombre, tempString.c_str());//COPIAMOS EL STRING A LA CADENA DE CARACTERES
 
         // SE CONVIERTE NOMBRE A CHAR[]
-        char tempNombre[tam2];
-        strcpy(tempNombre, nombre.c_str());
+        char tempNombre[tam2];//SE CREA LA VARIABLE CHAR
+        strcpy(tempNombre, nombre.c_str());//LE PASAS A TEMPNOMBRE LO QUE TENGA LA CLAVE
 
         // SE CONVIERTE LA LONGITUD DE DESCRIPCION A CHAR[]
         tempString = to_string(tam3);
@@ -59,15 +60,17 @@ void Bolso::insertarBolso() {
 
         // SE ESCRIBE EN EL ARCHIVO LOS CAMPOS DEL REGISTRO
         // SE ESCRIBE SU LONGITUD Y DESPUES SU VALOR
-        archivo.write(tempLenClave, sizeof(int));
-        archivo.write(tempClave, tam1);
+        archivo.write(tempLenClave, sizeof(int));//SE ESCRIBE LA LONGITUD DEL ATRIBUTO CLAVE
+        archivo.write(tempClave, tam1);//SE ESCRIBE LA CLAVE
 
-        archivo.write(tempLenNombre, sizeof(int));
-        archivo.write(tempNombre, tam2);
+        archivo.write(tempLenNombre, sizeof(int));//SE ESCRIBE LA LONGITUD DEL NOMBRE
+        archivo.write(tempNombre, tam2);// SE ESCRIBE LA CLAVE
+
 
         archivo.write(tempLenDescripcion, sizeof(int));
         archivo.write(tempDescripcion, tam3);
 
+        // SE IMPRIME EN PANTALLA LO QUE SE ESCRIBIO
         cout << endl << "Se ingreso el siguiente registro:" << endl
              << "Clave: " << clave << endl
              << "Nombre: " << nombre << endl
@@ -105,23 +108,23 @@ void Bolso::consultaBolso(string claveBolso) {
 
             strcpy(tempLen, limpiar.c_str()); // SE LIMPIA EL ARREGLO DE CARACTERES
 
-            archivo.read(tempLen, sizeof(int));
-            tam2 = atoi(tempLen);
-            char tempNombre[tam2];
-            archivo.read(tempNombre, tam2);
-            tempNombre[tam2] = '\0';
-            nombre = tempNombre;
+            archivo.read(tempLen, sizeof(int));// SE LEE LA LONGITUDO DEL NOMBRE
+            tam2 = atoi(tempLen);// SE CONVIERTE EL ARREGLO TEMPORAL A ENTERO
+            char tempNombre[tam2];// SE CREA EL ARREGLO DE CARACTERES PARA LA LECTURA DEL CAMPO
+            archivo.read(tempNombre, tam2);//SE LEE EL CAMPO NOMBRE
+            tempNombre[tam2] = '\0';// ASIGNAMOS EL CARACTER NULO MANUALMENTE
+            nombre = tempNombre;// LO PASAMOS AL ATRIBUTO DE LA CLASE
 
-            strcpy(tempLen, limpiar.c_str());
+            strcpy(tempLen, limpiar.c_str());// SE LIMPIA EL ARREGLO DE CARACTERES
 
-            archivo.read(tempLen, sizeof(int));
-            tam3 = atoi(tempLen);
-            char tempDescripcion[tam3];
-            archivo.read(tempDescripcion, tam3);
-            tempDescripcion[tam3] = '\0';
-            descripcion = tempDescripcion;
+            archivo.read(tempLen, sizeof(int));// SE LEE LA LONGITUD DE LA DESCRIPCION
+            tam3 = atoi(tempLen);// SE CONVIERTE EL ARREGLO TEMPORAL A ENTERO
+            char tempDescripcion[tam3];// SE CREA EL ARREGLO DE CARACTERES PARA LA LECTURA DEL CAMPO
+            archivo.read(tempDescripcion, tam3);//SE LEE EL CAMPO NOMBRE
+            tempDescripcion[tam3] = '\0';// ASIGNAMOS EL CARACTER NULO MANUALMENTE
+            descripcion = tempDescripcion;// LO PASAMOS AL ATRIBUTO DE LA CLASE
 
-            strcpy(tempLen, limpiar.c_str());
+            strcpy(tempLen, limpiar.c_str());// SE LIMPIA EL ARREGLO DE CARACTERES
 
             // SI LA CLAVE QUE BUSCA ES IGUAL A LA CLAVE LEIDA EN EL REGISTRO ENTONCES SE IMPRIME, SE ACTIVA LA BANDERA Y TERMINA LA BUSQUEDA
             if(claveBolso == clave) {

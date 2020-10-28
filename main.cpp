@@ -31,7 +31,7 @@ int main() {
 
     system("color F1");//Cambiando color de consola
 
-    //Creamos objeto bolso
+    //SE CREA UN OBJETO DE LA CLASE BOLSO
     Bolso bolso;
 
     int opc;
@@ -43,7 +43,7 @@ int main() {
         switch(opc) {
         case 1: 
         {
-            bolso.insertarBolso();//Inserta un nuevo bolso al archivo
+            bolso.insertarBolso();//SE MANDA LLAMAR LA FUNCION DE INSERTAR BOLSO
         }
         break;
 
@@ -54,7 +54,7 @@ int main() {
             do 
             {
                 cout << "Ingrese la clave a consultar: ";
-                getline(cin, claveBolso);
+                getline(cin, claveBolso);//MANDAMOS COMO PARAMETRO LA CLAVE
                 //break;
                 if(claveBolso.size() != 6) //CONFIRMAMOS QUE LOS DATOS CUMPLAN CON LA FORMA DE CAMPO CLAVE
                 {
@@ -110,6 +110,9 @@ int main() {
     return 0;
 }
 
+
+//Función que despliega el menú de opciones y retorna
+//en entero la opción del usuario
 int opcMenu() {
     int opcion;
 
@@ -124,41 +127,42 @@ int opcMenu() {
         cout<<"3.-Eliminar registro de manera LOGICA."<<endl;
         cout<<"4.-SALIR"<<endl;
 
-        opcion = tomarInt();
+        opcion = tomarInt();//PEDIMOS AL USUARIO INGRESAR SU OPCION COMO ENTERO Y VALIDAMOS LA ENTRADA
 
+        //ENTRAMOS AL CASO CORRESPONDIENTE SEGUN EL VALOR DE OPCION INGRESADO POR USUARIO
         switch(opcion) {
         case 1: 
         {
-            if(confirmacion(opcion) == true) 
+            if(confirmacion(opcion) == true) //CONFIRMA LA OPCION ELEGIDA
             {
-                return opcion;
+                return opcion;//RETORNA EL INT DE LA OPCION 
             }
         }
         break;
 
         case 2: 
         {
-            if(confirmacion(opcion) == true) 
+            if(confirmacion(opcion) == true) //CONFIRMA LA OPCION ELEGIDA
             {
-                return opcion;
+                return opcion;//RETORNA EL INT DE LA OPCION 
             }
         }
         break;
 
         case 3: 
         {
-            if(confirmacion(opcion) == true) 
+            if(confirmacion(opcion) == true) //CONFIRMA LA OPCION ELEGIDA
             {
-                return opcion;
+                return opcion;//RETORNA EL INT DE LA OPCION 
             }
         }
         break;
 
         case 4: 
         {
-            if(confirmacion(opcion) == true) 
+            if(confirmacion(opcion) == true) //CONFIRMA LA OPCION ELEGIDA
             {
-                return opcion;
+                return opcion;//RETORNA EL INT DE LA OPCION 
             }
         }
         break;
@@ -177,8 +181,11 @@ int opcMenu() {
     return opcion;
 }
 
+//FUNCION PARA QUE USUARIO CONFIRME LA OPCION ELEGIDA, TRUE PARA CONFIRMAR O FALSE PARA VOLVER AL MENÚ
 bool confirmacion(int opcion) {
     string nombreDeOpcion;
+
+    //ENTRAMOS AL CASO CORRESPONDIENTE SEGUN EL VALOR DE OPCION INGRESADO POR USUARIO
     switch (opcion) {
     case 1:
         nombreDeOpcion = "Insertar nuevo Registro";
@@ -196,22 +203,30 @@ bool confirmacion(int opcion) {
         break;
     }
 
+    //DESPLEGAMOS LA OPCION ELEGIDA PARA QUE USUARIO CONFIRME
     cout<<"\nElegiste la opcion "<<opcion<<".-"<<nombreDeOpcion<<" "<<endl;
     cout<<"Presiona 1 para confirmar o 0 para regresar el menu de opciones."<<endl<<endl;
 
     int opc1 = tomarInt();
     cout<<endl;
 
-    if(opc1 == 1) {
+    if(opc1 == 1) //SI CONFIRMA CON 1 SE RETORNA TRUE
+    { 
         return true;
-    } else if(opc1 == 0) {
+    } 
+    else if(opc1 == 0) //SI CANCELA CON 0, RETORNA FALSE
+    {
         return false;
-    } else {
+    } 
+    else //CUALQUIER OPCION INVALIDA RETORNA FALSE
+    {
         cout<<"Opcion invalida, volveras al menu inicial"<<endl;
         return false;
     }
 }
 
+//FUNCION PARA VALIDAR LA ENTRADA DE ENTEROS 
+//TOMA UNA CADENA, LA ANALISA Y SI ES VALIDA LA CONVIERTE A ENTERO
 int tomarInt() {
     string numero;
     bool esValido = false;
@@ -232,6 +247,9 @@ int tomarInt() {
     return atoi(numero.c_str());
 }
 
+//FUNCION PARA VALIDAR ENTRADA DE ENTEROS
+//RECIBE LA CADENA QUE INGRESA EL USUARIO Y ANALISA QUE
+//CONTENGA SOLO NUMEROS VALIDOS, RETORNA TRUE SI ES VALIDO
 bool tipoIntValido(string numero) {
     int inicio=0;
     if (numero.length()==0)
